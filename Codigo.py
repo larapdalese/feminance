@@ -2,16 +2,10 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-
-### Alinne
-st.page_link("https://financedivas.streamlit.app", label="Início", icon="🏠")
-st.page_link("pages/page_1.py", label="Gráficos")
-st.page_link("pages/page_2.py", label="Insights de Gastos", disabled=True)
-st.page_link("http://www.google.com", label="Notícias", icon="🌎")
-
-###
+from st_pages import add_page_title, get_nav_from_toml
 
 st.set_page_config(layout="wide")
+
 def apply_custom_css():
     st.markdown("""
         <style>
@@ -51,7 +45,15 @@ def apply_custom_css():
         }
         </style>
     """, unsafe_allow_html=True)
-    
+
+apply_custom_css()
+
+st.sidebar.title("Navegação")
+st.sidebar.markdown("[Início 🏠](https://financedivas.streamlit.app)")
+st.sidebar.markdown("[Gráficos 📊](https://graficosa2.streamlit.app/)")
+st.sidebar.markdown("[Insights 💡](https://insightsa2.streamlit.app/)")
+st.sidebar.markdown("[Notícias 🌎](https://newsa2.streamlit.app/)")
+
 def load_data():
     data = [
                 {"Nome da despesa": "Sephora", "Data": "2024-01-15", "Categoria": "beleza", "Forma de pagamento": "débito", "Tipo": "gasto", "Valor": 750.99},
@@ -184,24 +186,24 @@ def display_expense_chart(df):
         .sum()
         .reset_index()
     )
-    if 'editar_pizza' not in st.session_state:
-        st.session_state['editar_pizza'] = False
+    if 'editar_treemap' not in st.session_state:
+        st.session_state['editar_treemap'] = False
     if 'categoria_colors' not in st.session_state:
         st.session_state['categoria_colors'] = {cat: px.colors.qualitative.Plotly[i % len(px.colors.qualitative.Plotly)]
                                                 for i, cat in enumerate(despesas_por_categoria['Categoria'])}
-    fig = px.pie(
+    fig = px.treemap(
         despesas_por_categoria,
+        path=['Categoria'],
         values='Valor',
-        names='Categoria',
         title='Distribuição das Despesas por Categoria',
         color='Categoria',
         color_discrete_map=st.session_state['categoria_colors']
     )
     fig.update_layout(width=800, height=600)
     st.plotly_chart(fig)
-    if st.button("Editar Cores do Gráfico de Pizza"):
-        st.session_state['editar_pizza'] = not st.session_state['editar_pizza']
-    if st.session_state['editar_pizza']:
+    if st.button("Editar Cores do Gráfico de Treemap"):
+        st.session_state['editar_treemap'] = not st.session_state['editar_treemap']
+    if st.session_state['editar_treemap']:
         st.subheader("Editar Cores das Categorias")
         col1, col2 = st.columns(2)
         categorias = list(st.session_state['categoria_colors'].keys())
@@ -217,8 +219,8 @@ def display_expense_chart(df):
                         f"Cor para {categorias[i + 1]}", st.session_state['categoria_colors'][categorias[i + 1]]
                     )
         if st.button("Salvar Cores"):
-            st.success("Cores do gráfico de pizza atualizadas com sucesso!")
-            st.session_state['editar_pizza'] = False  
+            st.success("Cores do gráfico de treemap atualizadas com sucesso!")
+            st.session_state['editar_treemap'] = False
 def display_line_chart(df):
     if 'editar_grafico' not in st.session_state:
         st.session_state['editar_grafico'] = False
