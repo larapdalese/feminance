@@ -30,6 +30,7 @@ st.markdown("""
     </style>
     <h1 class="centered-title">Investimentos</h1>
     """, unsafe_allow_html=True)
+st.write("")
 col1, col2 = st.columns(2)
 with col1:
     st.subheader("Tipos de investimento")
