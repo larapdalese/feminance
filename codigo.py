@@ -78,15 +78,40 @@ with col2:
             st.error(f'Não foi possível obter os dados da cotação do {moeda}.')
     exibir_grafico_cotacao('USDBRL=X', 'Dólar')
     exibir_grafico_cotacao('EURBRL=X', 'Euro')
-st.markdown("---")
-st.header("Busque o símbolo de uma empresa na Bolsa")
-empresa = st.text_input("Digite o nome da empresa para buscar seu símbolo na Bolsa:")
+def buscar_simbolos_yahoo(nome_empresa):
+    url = f"https://query2.finance.yahoo.com/v1/finance/search?q={nome_empresa}"
+    resposta = requests.get(url)
+    if resposta.status_code == 200:
+        dados = resposta.json().get("quotes", [])
+        if dados:
+            resultados = [
+                {
+                    "symbol": item.get("symbol"),
+                    "name": item.get("longname", "Nome não disponível"),
+                    "type": item.get("quoteType", "Tipo não disponível"),
+                }
+                for item in dados
+            ]
+            return resultados
+        else:
+            return None
+    else:
+        return None
+
+# Layout principal do Streamlit
+st.title("Busque o símbolo de uma empresa globalmente")
+
+# Campo de entrada para o usuário digitar o nome da empresa
+empresa = st.text_input("Digite o nome da empresa para buscar o símbolo:")
 if empresa:
-    try:
-        resultados = yf.Ticker(empresa)
-        symbol = resultados.info.get('symbol', 'Símbolo não encontrado')
-        nome_empresa = resultados.info.get('shortName', 'Nome não encontrado')
-        st.write(f"**Nome da empresa:** {nome_empresa}")
-        st.write(f"**Símbolo:** {symbol}")
-    except Exception as e:
-        st.error(f"Erro ao buscar informações para '{empresa}': {str(e)}")
+    resultados = buscar_simbolos_yahoo(empresa)
+    if resultados:
+        st.write(f"Resultados encontrados para '{empresa}':")
+        for resultado in resultados:
+            st.write(
+                f"**Símbolo:** {resultado['symbol']} | "
+                f"**Nome:** {resultado['name']} | "
+                f"**Tipo:** {resultado['type']}"
+            )
+    else:
+        st.error("Nenhum símbolo encontrado para essa empresa. Verifique o nome e tente novamente.")
