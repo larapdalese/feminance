@@ -1,6 +1,7 @@
 import streamlit as st
 import yfinance as yf
 import datetime
+import requests
 st.set_page_config(layout="wide", page_title="Investimentos")
 def apply_custom_css():
     st.markdown("""
