@@ -85,4 +85,4 @@ with col2:
         e, por ter menos para vender, acontece o aumento de preços no supermercado.
         """
     )
-    exibir_grafico_cotacao('EURBRL=X', 'Euro')
+    exibir_grafico_cotacao('^BVSP', 'IBOVESPA')
