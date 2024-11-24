@@ -78,4 +78,3 @@ with col2:
             st.error(f'Não foi possível obter os dados da cotação do {moeda}.')
     exibir_grafico_cotacao('USDBRL=X', 'Dólar')
     exibir_grafico_cotacao('EURBRL=X', 'Euro')
-display_budget_section(df)
