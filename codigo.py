@@ -17,7 +17,7 @@ def apply_custom_css():
             text-align: center;
             font-size: 36px;
             font-weight: bold;
-            margin-top: -20px; /* Força o título a subir */
+            margin-top: -50px; /* Valor aumentado para subir ainda mais */
         }
         </style>
     """, unsafe_allow_html=True)
