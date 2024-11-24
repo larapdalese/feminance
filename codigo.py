@@ -64,6 +64,19 @@ with col1:
     </style>
     <p class="custom-subsubtitle">Investimentos de médio risco</p>
 """, unsafe_allow_html=True)
+    st.markdown("Rendem um pouco mais que os de baixo risco & as chances de você perder seu dinheiro não são altas!")
+    st.markdown("""
+        - **Fundos Imobiliários**: 
+        [ Fundos que investem em imóveis (como shoppings e escritórios) ou em títulos relacionados ao mercado imobiliário, oferecem dividendos mensais (aluguéis) e têm potencial de valorização.](https://fiis.com.br/)
+    """)
+    st.markdown("""
+        - **Ações de Empresas Consolidadas**: 
+        [Investimento em empresas com histórico estável e boa governança, como bancos e empresas de energia, oferecem ganhos de valorização e dividendos.](https://borainvestir.b3.com.br/objetivos-financeiros/investir-melhor/descomplicando-as-blue-chips-tudo-o-que-voce-tem-que-saber/?gclid=Cj0KCQiAuou6BhDhARIsAIfgrn4PBJ0mHiZPbEOReROu8PAUVwltoUxjd9QJF78X4ZVu5DDhiHyJggkaAs-wEALw_wcB)
+    """)
+    st.markdown("""
+        - **Tesouro Direto**: 
+        [Título público atrelado à inflação e com pagamentos semestrais de juros, protege contra a inflação e oferece retornos previsíveis.](https://www.tesourodireto.com.br/)
+    """)
 with col2:
     st.subheader("Gráficos de Cotação")
     def exibir_grafico_cotacao(ticker, moeda):
