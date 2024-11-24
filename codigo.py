@@ -69,7 +69,7 @@ with col1:
 with col2:
     st.subheader("Gráficos de Cotação")
     def exibir_grafico_cotacao(ticker, moeda):
-        today = datetime.datetime.today().strftime('%Y-%m-%d')  # Data atual
+        today = datetime.datetime.today().strftime('%Y-%m-%d')  
         dados = yf.download(ticker, start='2023-01-01', end=today)
         if not dados.empty:
             st.markdown(f"**{moeda}**")
@@ -78,22 +78,15 @@ with col2:
             st.error(f'Não foi possível obter os dados da cotação do {moeda}.')
     exibir_grafico_cotacao('USDBRL=X', 'Dólar')
     exibir_grafico_cotacao('EURBRL=X', 'Euro')
-st.set_page_config(layout="wide", page_title="Buscar Símbolos de Ações")
-st.markdown("<h1 style='text-align: center;'>Busca de Símbolos no Yahoo Finance</h1>", unsafe_allow_html=True)
-empresa = st.text_input("Digite o nome da empresa:", "")
+st.markdown("---")
+st.header("Busque o símbolo de uma empresa na Bolsa")
+empresa = st.text_input("Digite o nome da empresa para buscar seu símbolo na Bolsa:")
 if empresa:
-    url = f"https://query2.finance.yahoo.com/v1/finance/search?q={empresa}"
-    response = requests.get(url)
-    if response.status_code == 200:
-        data = response.json()
-        resultados = data.get("quotes", [])
-        if resultados:
-            st.subheader(f"Resultados encontrados para '{empresa}':")
-            for item in resultados:
-                nome_empresa = item.get("shortname", "Nome não disponível")
-                symbol = item.get("symbol", "Símbolo não disponível")
-                st.markdown(f"**Empresa:** {nome_empresa} | **Símbolo:** `{symbol}`")
-        else:
-            st.error("Nenhum símbolo encontrado para a empresa digitada.")
-    else:
-        st.error("Erro ao buscar os dados. Tente novamente mais tarde.")
+    try:
+        resultados = yf.Ticker(empresa)
+        symbol = resultados.info.get('symbol', 'Símbolo não encontrado')
+        nome_empresa = resultados.info.get('shortName', 'Nome não encontrado')
+        st.write(f"**Nome da empresa:** {nome_empresa}")
+        st.write(f"**Símbolo:** {symbol}")
+    except Exception as e:
+        st.error(f"Erro ao buscar informações para '{empresa}': {str(e)}")
