@@ -77,7 +77,7 @@ with col1:
         - **Tesouro Direto**: 
         [Título público atrelado à inflação e com pagamentos semestrais de juros, protege contra a inflação e oferece retornos previsíveis.](https://www.tesourodireto.com.br/)
     """)
-        st.markdown("""
+    st.markdown("""
     <style>
     .custom-subsubtitle {
         font-size: 20px; 
