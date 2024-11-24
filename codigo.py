@@ -1,6 +1,7 @@
 import streamlit as st
 import yfinance as yf
 import datetime
+import altair as alt
 st.set_page_config(layout="wide", page_title="Investimentos")
 def apply_custom_css():
     st.markdown("""
@@ -67,27 +68,41 @@ with col1:
     <p class="custom-subsubtitle">Investimentos de médio risco</p>
 """, unsafe_allow_html=True)
 with col2:
-    st.subheader("Gráficos de Cotação")
-    def exibir_grafico_cotacao(ticker, moeda):
-        today = datetime.datetime.today().strftime('%Y-%m-%d')  
-        dados = yf.download(ticker, start='2023-01-01', end=today)
+    st.subheader("Gráficos de Cotação")   
+    def exibir_grafico_cotacao(ticker, ativo):
+        today = datetime.datetime.today().strftime('%Y-%m-%d')
+        dados = yf.download(ticker, start='2023-01-01', end=today)     
         if not dados.empty:
-            st.markdown(f"**{moeda}**")
-            st.line_chart(dados['Close'])
+            if 'Close' in dados.columns:
+                st.markdown(f"**{ativo}**")
+                dados = dados.reset_index()  
+                grafico = alt.Chart(dados).mark_line(color="#E85234").encode(
+                    x='Date:T',
+                    y='Close:Q',
+                    tooltip=['Date:T', 'Close:Q']
+                ).properties(
+                    width=700,
+                    height=400
+                )
+                st.altair_chart(grafico, use_container_width=True)
+                ultimo_valor = dados['Close'].iloc[-1]
+                st.write(f"Último valor do {ativo.lower()}: R$ {ultimo_valor:.2f}")
+            else:
+                st.error(f"A coluna 'Close' não foi encontrada nos dados do {ativo}.")
         else:
-            st.error(f'Não foi possível obter os dados da cotação do {moeda}.')
-    exibir_grafico_cotacao('USDBRL=X', 'Bolsa do Dólar')
+            st.error(f"Não foi possível obter os dados do {ativo}. O DataFrame está vazio.")
+    exibir_grafico_cotacao('USDBRL=X', 'Dólar')
     st.write(
         """
-        Saber o valor do dólar e o quanto o preço dele varia pode ser muito importante, muito além de motivos como viagens programadas. 
+        Saber o valor do dólar e o quanto o preço dele varia pode ser muito importante, vai além de motivos como viagens programadas. 
         Com a alta do dólar, empresas que exportam seus produtos (como carne, açúcar, grãos e outros produtos) optam estrategicamente 
         em atender o mercado de fora do Brasil, porque rende mais dinheiro. Dessa forma, a oferta de produtos ao mercado daqui é reduzida 
         e, por ter menos para vender, acontece o aumento de preços no supermercado.
         """
     )
-    exibir_grafico_cotacao('^BVSP', 'Bolsa de Valores Brasileira')
+    exibir_grafico_cotacao('^BVSP', 'IBOVESPA')
     st.markdown(
         """
-        [Ok, mas o que é a Bolsa de Valores Brasileira/IBOVESPA e qual o motivo dela ser importante?](https://g1.globo.com/economia/especial-publicitario/inteligencia-financeira/noticia/2022/06/23/voce-sabe-o-que-e-o-ibovespa-e-sua-importancia-no-mercado-de-capitais.ghtml)
+        [Ok, mas o que é a Bolsa de Valores Brasileira/IBOVESPA?](https://g1.globo.com/economia/especial-publicitario/inteligencia-financeira/noticia/2022/06/23/voce-sabe-o-que-e-o-ibovespa-e-sua-importancia-no-mercado-de-capitais.ghtml)
         """
     )
