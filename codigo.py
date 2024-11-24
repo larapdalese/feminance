@@ -28,10 +28,6 @@ st.markdown("""
     }
     </style>
     <h1 class="centered-title">Investimentos</h1>
-    <p class="centered-subtitle">
-        Aqui você encontra possibilidades de investimentos, cotação do dólar e outros valores da <br>
-        bolsa atual. Caso não entenda algo, a Maria Clara estará sempre à sua disposição!<3
-    </p>
     """, unsafe_allow_html=True)
 col1, col2 = st.columns(2)
 with col1:
