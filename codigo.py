@@ -7,7 +7,7 @@ def apply_custom_css():
     st.markdown("""
         <style>
         .main .block-container {
-            padding-top: 1rem;
+            padding-top: 0.5rem; /* Reduz o espaçamento superior */
             padding-bottom: 1rem;
             padding-left: 0.5rem;
             padding-right: 0.5rem;
@@ -30,6 +30,7 @@ st.markdown("""
     </style>
     <h1 class="centered-title">Investimentos</h1>
     """, unsafe_allow_html=True)
+st.write("")
 st.write("")
 col1, col2 = st.columns(2)
 with col1:
