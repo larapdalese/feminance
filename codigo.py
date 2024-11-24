@@ -7,27 +7,22 @@ def apply_custom_css():
     st.markdown("""
         <style>
         .main .block-container {
-            padding-top: 0.5rem; /* Reduz o espaçamento superior */
+            padding-top: 0rem; /* Remove o espaço do container principal */
             padding-bottom: 1rem;
             padding-left: 0.5rem;
             padding-right: 0.5rem;
             max-width: 100%;
         }
+        .centered-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: -20px; /* Força o título a subir */
+        }
         </style>
     """, unsafe_allow_html=True)
 apply_custom_css()
 st.markdown("""
-    <style>
-    .centered-title {
-        text-align: center;
-        font-size: 36px;
-        font-weight: bold;
-    }
-    .centered-subtitle {
-        text-align: center;
-        font-size: 18px;
-    }
-    </style>
     <h1 class="centered-title">Investimentos</h1>
     """, unsafe_allow_html=True)
 st.write("")
