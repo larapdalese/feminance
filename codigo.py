@@ -78,3 +78,22 @@ with col2:
             st.error(f'Não foi possível obter os dados da cotação do {moeda}.')
     exibir_grafico_cotacao('USDBRL=X', 'Dólar')
     exibir_grafico_cotacao('EURBRL=X', 'Euro')
+st.set_page_config(layout="wide", page_title="Buscar Símbolos de Ações")
+st.markdown("<h1 style='text-align: center;'>Busca de Símbolos no Yahoo Finance</h1>", unsafe_allow_html=True)
+empresa = st.text_input("Digite o nome da empresa:", "")
+if empresa:
+    url = f"https://query2.finance.yahoo.com/v1/finance/search?q={empresa}"
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        resultados = data.get("quotes", [])
+        if resultados:
+            st.subheader(f"Resultados encontrados para '{empresa}':")
+            for item in resultados:
+                nome_empresa = item.get("shortname", "Nome não disponível")
+                symbol = item.get("symbol", "Símbolo não disponível")
+                st.markdown(f"**Empresa:** {nome_empresa} | **Símbolo:** `{symbol}`")
+        else:
+            st.error("Nenhum símbolo encontrado para a empresa digitada.")
+    else:
+        st.error("Erro ao buscar os dados. Tente novamente mais tarde.")
