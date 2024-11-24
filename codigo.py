@@ -68,33 +68,22 @@ with col1:
     <p class="custom-subsubtitle">Investimentos de médio risco</p>
 """, unsafe_allow_html=True)
 with col2:
-    st.subheader("Gráficos de Cotação")  
-    def exibir_grafico_cotacao(ticker, ativo):
-        today = datetime.datetime.today().strftime('%Y-%m-%d')
+    st.subheader("Gráficos de Cotação")
+    def exibir_grafico_cotacao(ticker, moeda):
+        today = datetime.datetime.today().strftime('%Y-%m-%d')  
         dados = yf.download(ticker, start='2023-01-01', end=today)
         if not dados.empty:
-            st.write(f"Colunas disponíveis para {ativo}: {list(dados.columns)}")
-            if 'Close' in dados.columns:
-                st.markdown(f"**{ativo}**")
-                st.line_chart(dados['Close'])
-                ultimo_valor = dados['Close'].iloc[-1]
-                st.write(f"Último valor do {ativo.lower()}: R$ {ultimo_valor:.2f}")
-            else:
-                st.error(f"A coluna 'Close' não foi encontrada nos dados do {ativo}.")
+            st.markdown(f"**{moeda}**")
+            st.line_chart(dados['Close'])
         else:
-            st.error(f"Não foi possível obter os dados do {ativo}. O DataFrame está vazio.")
+            st.error(f'Não foi possível obter os dados da cotação do {moeda}.')
     exibir_grafico_cotacao('USDBRL=X', 'Dólar')
     st.write(
         """
-        Saber o valor do dólar e o quanto o preço dele varia pode ser muito importante, vai além de motivos como viagens programadas. 
+        Saber o valor do dólar e o quanto o preço dele varia pode ser muito importante, muito além de motivos como viagens programadas. 
         Com a alta do dólar, empresas que exportam seus produtos (como carne, açúcar, grãos e outros produtos) optam estrategicamente 
         em atender o mercado de fora do Brasil, porque rende mais dinheiro. Dessa forma, a oferta de produtos ao mercado daqui é reduzida 
         e, por ter menos para vender, acontece o aumento de preços no supermercado.
         """
     )
-    exibir_grafico_cotacao('^BVSP', 'IBOVESPA')
-    st.markdown(
-        """
-        [Ok, mas o que é a Bolsa de Valores Brasileira/IBOVESPA?](https://g1.globo.com/economia/especial-publicitario/inteligencia-financeira/noticia/2022/06/23/voce-sabe-o-que-e-o-ibovespa-e-sua-importancia-no-mercado-de-capitais.ghtml)
-        """
-    )
+    exibir_grafico_cotacao('EURBRL=X', 'Euro')
