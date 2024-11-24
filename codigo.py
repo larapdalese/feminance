@@ -89,16 +89,16 @@ with col1:
 """, unsafe_allow_html=True)
     st.markdown("São os que mais rendem & tem as maiores chances de perda! Dica? Faça com aquele dinheiro que você têm certeza de que não precisará, que está mesmo disposta a arriscar")
     st.markdown("""
-        - **Fundos Imobiliários**: 
-        [ Fundos que investem em imóveis (como shoppings e escritórios) ou em títulos relacionados ao mercado imobiliário, oferecem dividendos mensais (aluguéis) e têm potencial de valorização.](https://fiis.com.br/)
+        - **Câmbio**: 
+        [Investimentos abertos atrelados a moedas estrangeiras, como dólar ou euro.](https://www.modalmais.com.br/blog/cambio-como-funciona/)
     """)
     st.markdown("""
-        - **Ações de Empresas Consolidadas**: 
-        [Investimento em empresas com histórico estável e boa governança, como bancos e empresas de energia, oferecem ganhos de valorização e dividendos.](https://borainvestir.b3.com.br/objetivos-financeiros/investir-melhor/descomplicando-as-blue-chips-tudo-o-que-voce-tem-que-saber/?gclid=Cj0KCQiAuou6BhDhARIsAIfgrn4PBJ0mHiZPbEOReROu8PAUVwltoUxjd9QJF78X4ZVu5DDhiHyJggkaAs-wEALw_wcB)
+        - **Criptomoedas**: 
+        [Moeda digital que não depende de sistema bancário.](https://investalk.bb.com.br/noticias/quero-aprender/criptomoedas-e-suas-oportunidades-de-investimento-o-guia-investalk-cripto)
     """)
     st.markdown("""
-        - **Tesouro Direto**: 
-        [Título público atrelado à inflação e com pagamentos semestrais de juros, protege contra a inflação e oferece retornos previsíveis.](https://www.tesourodireto.com.br/)
+        - **Day Trade**: 
+        [compra e venda de ativos dentro de um único dia de negociação, exige conhecimento profundo do mercado, habilidades técnicas avançadas e capacidade de tomar decisões rápidas.](https://borainvestir.b3.com.br/glossario/day-trade/?gclid=Cj0KCQiAuou6BhDhARIsAIfgrn6fiKkHF_iJl9jPtah1vdWo9gcNFfZRd07HkfqIjOjYUVDw1kjcE4MaAopOEALw_wcB)
     """)
 with col2:
     st.subheader("Gráficos de Cotação")
