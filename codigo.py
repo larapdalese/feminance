@@ -70,14 +70,17 @@ with col2:
     st.subheader("Gráficos de Cotação")
     def exibir_grafico_cotacao(ticker, moeda):
         today = datetime.datetime.today().strftime('%Y-%m-%d')  
-        dados = yf.download(ticker, start='2023-01-01', end=today)
-        if not dados.empty: 
-            st.markdown(f"**{moeda}**")
-            st.line_chart(dados['Close'])
-            ultimo_valor = dados['Close'][-1]
-            st.write(f"Valor do {moeda.lower()} hoje: R$ {ultimo_valor:.2f}")
+        dados = yf.download(ticker, start='2023-01-01', end=today)        
+        if not dados.empty:
+            if 'Close' in dados.columns:
+                st.markdown(f"**{moeda}**")
+                st.line_chart(dados['Close'])
+                ultimo_valor = dados['Close'][-1]
+                st.write(f"Valor do {moeda.lower()} hoje: R$ {ultimo_valor:.2f}")
+            else:
+                st.error(f"A coluna 'Close' não foi encontrada nos dados da cotação do {moeda}.")
         else:
-            st.error(f'Não foi possível obter os dados da cotação do {moeda}.')
+            st.error(f"Não foi possível obter os dados da cotação do {moeda}. O DataFrame retornado está vazio.")
     exibir_grafico_cotacao('USDBRL=X', 'Dólar')
     st.write(
         """
