@@ -77,12 +77,12 @@ with col2:
         else:
             st.error(f'Não foi possível obter os dados da cotação do {moeda}.')
     exibir_grafico_cotacao('USDBRL=X', 'Dólar')
-        st.write(
-           """
-           Saber o valor do dólar e o quanto o preço dele varia pode ser muito importante, muito além de motivos como viagens programadas. 
-           Com a alta do dólar, empresas que exportam seus produtos (como carne, açúcar, grãos e outros produtos) optam estrategicamente 
-           em atender o mercado de fora do Brasil, porque rende mais dinheiro. Dessa forma, a oferta de produtos ao mercado daqui é reduzida 
-           e, por ter menos para vender, acontece o aumento de preços no supermercado.
-           """
-        )
+    st.write(
+        """
+        Saber o valor do dólar e o quanto o preço dele varia pode ser muito importante, muito além de motivos como viagens programadas. 
+        Com a alta do dólar, empresas que exportam seus produtos (como carne, açúcar, grãos e outros produtos) optam estrategicamente 
+        em atender o mercado de fora do Brasil, porque rende mais dinheiro. Dessa forma, a oferta de produtos ao mercado daqui é reduzida 
+        e, por ter menos para vender, acontece o aumento de preços no supermercado.
+        """
+    )
     exibir_grafico_cotacao('EURBRL=X', 'Euro')
