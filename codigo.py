@@ -86,3 +86,8 @@ with col2:
         """
     )
     exibir_grafico_cotacao('^BVSP', 'Bolsa de Valores Brasileira')
+    st.markdown(
+        """
+        [Ok, mas o que é a Bolsa de Valores Brasileira/IBOVESPA e qual o motivo dela ser importante?](https://g1.globo.com/economia/especial-publicitario/inteligencia-financeira/noticia/2022/06/23/voce-sabe-o-que-e-o-ibovespa-e-sua-importancia-no-mercado-de-capitais.ghtml)
+        """
+    )
