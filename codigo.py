@@ -71,11 +71,11 @@ with col2:
     st.subheader("Gráficos de Cotação")   
     def exibir_grafico_cotacao(ticker, ativo):
         today = datetime.datetime.today().strftime('%Y-%m-%d')
-        dados = yf.download(ticker, start='2023-01-01', end=today)     
+        dados = yf.download(ticker, start='2023-01-01', end=today)
         if not dados.empty:
             if 'Close' in dados.columns:
                 st.markdown(f"**{ativo}**")
-                dados = dados.reset_index()  
+                dados = dados.reset_index() 
                 grafico = alt.Chart(dados).mark_line(color="#E85234").encode(
                     x='Date:T',
                     y='Close:Q',
@@ -86,7 +86,10 @@ with col2:
                 )
                 st.altair_chart(grafico, use_container_width=True)
                 ultimo_valor = dados['Close'].iloc[-1]
-                st.write(f"Último valor do {ativo.lower()}: R$ {ultimo_valor:.2f}")
+                if pd.notnull(ultimo_valor):
+                    st.write(f"Último valor do {ativo.lower()}: R$ {ultimo_valor:.2f}")
+                else:
+                    st.write(f"Último valor do {ativo.lower()} não está disponível.")
             else:
                 st.error(f"A coluna 'Close' não foi encontrada nos dados do {ativo}.")
         else:
