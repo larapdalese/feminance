@@ -76,7 +76,7 @@ with col2:
             st.line_chart(dados['Close'])
         else:
             st.error(f'Não foi possível obter os dados da cotação do {moeda}.')
-    exibir_grafico_cotacao('USDBRL=X', 'Dólar')
+    exibir_grafico_cotacao('USDBRL=X', 'Bolsa do Dólar')
     st.write(
         """
         Saber o valor do dólar e o quanto o preço dele varia pode ser muito importante, muito além de motivos como viagens programadas. 
@@ -85,4 +85,4 @@ with col2:
         e, por ter menos para vender, acontece o aumento de preços no supermercado.
         """
     )
-    exibir_grafico_cotacao('^BVSP', 'IBOVESPA')
+    exibir_grafico_cotacao('^BVSP', 'Bolsa de Valores Brasileira')
