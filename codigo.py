@@ -71,7 +71,7 @@ with col2:
     def exibir_grafico_cotacao(ticker, moeda):
         today = datetime.datetime.today().strftime('%Y-%m-%d')  
         dados = yf.download(ticker, start='2023-01-01', end=today)
-       if not dados.empty:
+        if not dados.empty: 
             st.markdown(f"**{moeda}**")
             st.line_chart(dados['Close'])
             ultimo_valor = dados['Close'][-1]
